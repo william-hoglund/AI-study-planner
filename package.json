@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "Server.js",
+  "scripts": {
+    "dev": "nodemon Server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.18",
+    "@fullcalendar/interaction": "^6.1.18",
+    "@fullcalendar/react": "^6.1.18",
+    "@fullcalendar/timegrid": "^6.1.18",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.19.2",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "node-fetch": "^3.3.2",
+    "node-ical": "^0.15.1",
+    "openai": "^4.28.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

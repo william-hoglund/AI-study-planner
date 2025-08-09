@@ -1,0 +1,73 @@
+/* Profil: delar samma design-DNA som landing */
+:root{
+  --brand1:#007bff;
+  --brand2:#0056b3;
+  --ink:#213547;
+  --muted:#6b7280;
+  --bg:#ffffff;
+  --shadow:0 10px 30px rgba(0,0,0,.12);
+  --radius:16px;
+}
+
+.container{ max-width:1100px; margin:0 auto; padding:0 20px; }
+
+.page-hero.gradient{
+  padding:70px 0 50px;
+  background: linear-gradient(135deg, var(--brand1), var(--brand2));
+  color:#fff;
+}
+.page-section{ padding:50px 0; background:#fff; }
+
+.grid-2{
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+}
+.card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:var(--radius);
+  padding:18px; box-shadow:0 6px 14px rgba(0,0,0,.06);
+}
+.stack{ display:flex; flex-direction:column; gap:12px; }
+
+.ui-input{
+  width:100%; padding:10px 12px; border-radius:10px; border:1px solid #d1d5db;
+  background:#fff;
+}
+.ui-input:focus{ outline:none; border-color:#94a3b8; box-shadow:0 0 0 3px rgba(148,163,184,.25); }
+
+.primary{
+  padding:10px 14px; border-radius:12px; border:0; background:var(--brand1); color:#fff; cursor:pointer;
+  transition:transform .15s ease, box-shadow .2s ease;
+}
+.primary:hover{ transform:translateY(-2px); box-shadow: var(--shadow); }
+
+.ghost{
+  padding:8px 12px; border-radius:10px; border:1px solid #e5e7eb; background:#fff; cursor:pointer;
+}
+.danger{
+  padding:8px 12px; border-radius:10px; border:1px solid #ef4444; background:#fee2e2; color:#991b1b; cursor:pointer;
+}
+
+.list{ padding-left:1rem; }
+.list li{ margin:6px 0; color:var(--muted); }
+.muted{ color:var(--muted); }
+
+/* Goals */
+.goal-new .goal-inputs{
+  display:grid; grid-template-columns: 1fr 160px auto; gap:10px; align-items:center;
+}
+.goal-list{ list-style:none; padding:0; margin:16px 0 0; display:flex; flex-direction:column; gap:10px; }
+.goal-item{ background:#fafafa; border:1px solid #eee; border-radius:12px; padding:12px 12px; }
+
+.goal-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.goal-main{ display:flex; align-items:flex-start; gap:10px; }
+.goal-check{ font-size:1.2rem; }
+.goal-text{ font-weight:600; color:var(--ink); }
+.goal-date{ font-size:.9rem; }
+
+.goal-edit-grid{ display:grid; grid-template-columns: 1fr 160px; gap:10px; }
+
+/* Responsive */
+@media (max-width: 960px){
+  .grid-2{ grid-template-columns:1fr; }
+  .goal-new .goal-inputs{ grid-template-columns: 1fr; }
+  .goal-edit-grid{ grid-template-columns: 1fr; }
+}

@@ -1,0 +1,44 @@
+/* Gör navbaren lite transparent tills man scrollar */
+.navbar {
+  background: linear-gradient(135deg, var(--brand1), var(--brand2));
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar.scrolled {
+  background: linear-gradient(135deg, var(--brand1), var(--brand2));
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+body { padding-top: 60px; background-color: var(--bg); }
+button, .primary, .cta-button {
+  border-radius: 12px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+button:hover, .primary:hover, .cta-button:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.card { border-radius: var(--radius); box-shadow: var(--shadow); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.card:hover { transform: translateY(-3px); box-shadow: 0 6px 14px rgba(0,0,0,0.12); }
+.fade-in { opacity: 0; transform: translateY(10px); animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+/* --- din befintliga långa App.css fortsätter nedan (oförändrad) --- */
+.App{display:flex;flex-direction:column;align-items:center;padding:20px;}
+.app-header{text-align:center;}
+.app-main{width:100%;max-width:600px;}
+.landing-page{font-family:Arial,sans-serif;color:#333;line-height:1.6;}
+.hero{text-align:center;padding:50px 20px;background:linear-gradient(135deg,#007bff,#0056b3);color:white;}
+.hero h1{font-size:2.5rem;margin-bottom:20px;}
+.hero p{font-size:1.2rem;margin-bottom:30px;}
+.cta-button{display:inline-block;padding:12px 18px;background:#fff;color:#007bff;border-radius:12px;font-weight:700;border:0;cursor:pointer;transition:transform .15s ease, box-shadow .2s ease;box-shadow:0 8px 18px rgba(0,0,0,.15);}
+.cta-button:hover{ transform: translateY(-2px); box-shadow:var(--shadow);}
+.features{text-align:center;padding:50px 20px;background-color:#f8f9fa;}
+.features h2{font-size:2rem;margin-bottom:30px;}
+.feature-cards{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.card{background:white;border:1px solid #ddd;border-radius:8px;padding:20px;width:300px;box-shadow:0 4px 8px rgba(0,0,0,0.1);transition:transform 0.3s ease, box-shadow 0.3s ease;}
+.card h3{font-size:1.5rem;margin-bottom:10px;}
+.card p{font-size:1rem;color:#555;}
+.footer{text-align:center;padding:20px;background-color:#333;color:white;}
+:root{--brand1:#007bff;--brand2:#0056b3;--ink:#213547;--muted:#6b7280;--bg:#ffffff;--glass:rgba(255,255,255,0.6);--shadow:0 10px 30px rgba(0,0,0,.12);--radius:18px;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+/* (resten av din App.css från senaste filen, oförändrad) */
+html, body, #root { height: 100%; }
+body { display: flex; flex-direction: column; }
+.page { flex: 1; display: flex; flex-direction: column; }
+.page-section { min-height: calc(100vh - 60px); }
+.page-hero { min-height: calc(100vh - 60px); display:flex; flex-direction:column; justify-content:center; }

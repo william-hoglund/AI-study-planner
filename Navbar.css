@@ -1,0 +1,75 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(135deg, var(--brand1), var(--brand2));
+  color: #fff;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;       /* 🔹 Vertikal centrering */
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  position: relative;        /* 🔹 gör att vi kan centrera länkarna absolut */
+}
+
+.navbar-logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.navbar-links {
+  position: absolute;        /* 🔹 centrera oberoende av vänster/höger */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.navbar-links a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+}
+
+.navbar-profile {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.user-icon {
+  font-size: 1.6rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}

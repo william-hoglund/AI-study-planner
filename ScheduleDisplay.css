@@ -1,0 +1,7 @@
+.schedule-display {
+  margin-top: 20px; padding: 20px; border-radius: 8px; background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); text-align: center;
+}
+.schedule-display h2 { font-size: 1.5rem; color: #333; margin-bottom: 15px; }
+.schedule-card { padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #fff; text-align: left; font-family: 'Courier New', Courier, monospace; white-space: pre-wrap; word-wrap: break-word; }
+.schedule-card pre { margin: 0; font-size: 1rem; color: #555; }
