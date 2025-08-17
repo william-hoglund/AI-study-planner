@@ -1,75 +1,104 @@
 .navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 60px;
-  background: linear-gradient(135deg, var(--brand1), var(--brand2));
-  color: #fff;
   z-index: 1000;
-
-  display: flex;
-  align-items: center;       /* 🔹 Vertikal centrering */
 }
 
-.navbar-content {
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .search-bar input {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.navbar .right-section {
+    display: flex; /* Ensure links and account icon are in the same row */
+    align-items: center;
+  }
+
+  
+.navbar .search-bar {
+    margin-right: 20px; /* Add spacing between the search bar and the links */
+  }
+.navbar .links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
-  width: 100%;
-  position: relative;        /* 🔹 gör att vi kan centrera länkarna absolut */
+  margin-right: 20px;
 }
 
-.navbar-logo {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #fff;
+.navbar .links a {
+  margin-left: 20px;
   text-decoration: none;
+  color: #007bff;
+  font-size: 1rem;
 }
 
-.navbar-links {
-  position: absolute;        /* 🔹 centrera oberoende av vänster/höger */
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 20px;
-}
-
-.navbar-links a {
-  color: #fff;
+.navbar .links .button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
   text-decoration: none;
-  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .links .button:hover {
+  background-color: #0056b3;
+}
+
+.navbar .account {
   position: relative;
-  padding-bottom: 2px;
-}
-
-.navbar-links a.active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: #fff;
-}
-
-.navbar-profile {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
 }
 
-.user-icon {
-  font-size: 1.6rem;
-  color: #fff;
+.navbar .account .icon {
+  font-size: 1.5rem;
+  margin-right: 8px;
+  color: #007bff;
   cursor: pointer;
+  margin-right: 40px;
 }
 
-.profile-link {
-  display: flex;
-  align-items: center;
+.navbar .account .dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transform: translateX(-30px);
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 1001;
+}
+
+.navbar .account:hover .dropdown-content {
+  display: block;
+}
+
+.navbar .account .dropdown-content a {
+  display: block;
   text-decoration: none;
+  color: #007bff;
+  padding: 5px 0;
+}
+
+.navbar .links,
+.navbar .account {
+  margin-left: 20px; /* Add spacing between links and the account icon */
 }

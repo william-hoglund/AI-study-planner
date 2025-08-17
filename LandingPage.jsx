@@ -44,7 +44,7 @@ export default function LandingPage() {
 
       <section className="features">
         <div className="container">
-          <h2>Varför AI Study Planner?</h2>
+          <h2>Varför Schedule Optimizer?</h2>
           <div className="feature-cards">
             <article className="card feature">
               <h3>Importera scheman</h3>
@@ -61,17 +61,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-
-      <footer className="footer">
-        <div className="container footer-inner">
-          <span>© {new Date().getFullYear()} AI Study Planner</span>
-          <nav className="footer-nav">
-            <Link to="/about">Om</Link>
-            <Link to="/contact">Kontakt</Link>
-            <Link to="/profile">Profil</Link>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }

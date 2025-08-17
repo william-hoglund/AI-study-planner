@@ -4,6 +4,7 @@
   "type": "module",
   "main": "Server.js",
   "scripts": {
+    "start": "node Server.js",
     "dev": "nodemon Server.js"
   },
   "engines": {
@@ -14,11 +15,16 @@
     "@fullcalendar/interaction": "^6.1.18",
     "@fullcalendar/react": "^6.1.18",
     "@fullcalendar/timegrid": "^6.1.18",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.19.2",
+    "express-rate-limit": "^7.1.5",
     "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.1",
     "morgan": "^1.10.1",
+    "multer": "^2.0.0",
     "node-fetch": "^3.3.2",
     "node-ical": "^0.15.1",
     "openai": "^4.28.4"

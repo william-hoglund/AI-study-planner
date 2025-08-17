@@ -46,7 +46,7 @@ export default function ProfilePage() {
 
   return (
     <div className="page">
-      <section className="page-hero gradient">
+      <section className="page-hero page-banner">
         <div className="container">
           <h1>Din profil</h1>
           <p>Spara preferenser och mål som påverkar AI‑optimeringen.</p>
@@ -55,6 +55,21 @@ export default function ProfilePage() {
 
       <section className="page-section">
         <div className="container grid-2">
+          <article className="card">
+            <h3>👤 Konto</h3>
+            <div className="stack">
+              <div className="ui-input" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                <span>E‑post</span>
+                <strong>demo@user.app</strong>
+              </div>
+              <div className="ui-input" style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                <span>Status</span>
+                <span className="muted">Ej kopplad</span>
+              </div>
+              <button className="ghost" disabled>Hantera konto (snart)</button>
+            </div>
+          </article>
+
           <article className="card">
             <h3>⚙️ Studieteknik</h3>
             <p>Välj standardteknik för schemageneratorn.</p>
@@ -65,15 +80,25 @@ export default function ProfilePage() {
               <small className="muted">{techniqueDesc}</small>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section className="page-section">
+        <div className="container grid-2">
+          <article className="card">
+            <h3>🔔 Notiser</h3>
+            <p className="muted">Kommer snart: Pushnotiser för fokuspass och pauser.</p>
+            <button className="ghost" disabled>Aktivera push (snart)</button>
+          </article>
 
           <article className="card">
-            <h3>📊 Snabbstatus</h3>
+            <h3>📅 Kalendrar</h3>
             <ul className="list">
-              <li>👤 Inloggning: (demo) ej kopplad</li>
-              <li>📅 Kalendrar: {0} länkade</li>
-              <li>🔔 Påminnelser: inaktiva</li>
+              <li>Google Calendar – ej kopplad</li>
+              <li>Apple Calendar – ej kopplad</li>
+              <li>Outlook – ej kopplad</li>
             </ul>
-            <p className="muted">Kommer snart: konto, kalenderkoppling och notiser.</p>
+            <button className="ghost" disabled>Koppla kalender (snart)</button>
           </article>
         </div>
       </section>
