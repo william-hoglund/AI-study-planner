@@ -68,6 +68,17 @@
   cursor: pointer;
 }
 
+/* status dot: green if online, red if offline */
+.navbar-profile .user-icon:first-child {
+  font-size: 0.9rem;
+  margin-right: 8px;
+  color: #16d07e; /* default green */
+}
+
+.navbar-profile[title*="Offline"] .user-icon:first-child {
+  color: #ff5b5b;
+}
+
 .profile-link {
   display: flex;
   align-items: center;

@@ -3,55 +3,49 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // drag, drop, click
+import svLocale from "@fullcalendar/core/locales/sv";
+// NOTE: Some FullCalendar builds no longer ship CSS files via ESM exports.
+// If you need the official styles, either add them via CDN in index.html
+// or install and reference the CSS files directly if your package version includes them.
 
-// Example color map per class/course
-const CLASS_COLORS = {
-  Math: "#e91e63",
-  Physics: "#3f51b5",
-  Chemistry: "#009688",
-  Economics: "#ff9800",
-  Default: "#607d8b",
-};
-
-// Quick helper to colorize an event by its course
-function decorateEvent(ev) {
-  const course = ev.extendedProps?.course;
-  const color = CLASS_COLORS[course] || CLASS_COLORS.Default;
-  return { ...ev, backgroundColor: color, borderColor: color };
+function subjectLabel(ev) {
+  const s = ev?.extendedProps?.subject || 'General';
+  const c = ev?.extendedProps?.code ? ` (${ev.extendedProps.code})` : '';
+  return `${s}${c}`;
 }
 
-export default function CalendarView() {
-  // Replace this with data from your backend
-  const [events, setEvents] = useState([
+export default function CalendarView({ events: externalEvents }) {
+  // If events are passed in, use them; otherwise fall back to demo data
+  const [events, setEvents] = useState(() => externalEvents || [
     {
       id: "1",
       title: "Lecture: Vectors",
       start: "2025-08-11T10:00:00",
       end: "2025-08-11T12:00:00",
-      extendedProps: { course: "Math" },
-    },
-    {
-      id: "2",
-      title: "Seminar: Micro",
-      start: "2025-08-12T09:00:00",
-      end: "2025-08-12T10:30:00",
-      extendedProps: { course: "Economics" },
+      extendedProps: { subject: "Math", type: "Lecture" },
+      backgroundColor: "#3b82f6", borderColor: "#3b82f6"
     },
   ]);
 
-  // Filter by class (course)
-  const allCourses = useMemo(() => {
-    const set = new Set(events.map(e => e.extendedProps?.course || "Unlabeled"));
+  // Sync when parent updates events
+  React.useEffect(() => {
+    if (externalEvents && Array.isArray(externalEvents)) {
+      setEvents(externalEvents);
+    }
+  }, [externalEvents]);
+
+  // Filter by subject
+  const allSubjects = useMemo(() => {
+    const set = new Set(events.map(e => subjectLabel(e)));
     return ["All", ...Array.from(set)];
   }, [events]);
 
-  const [courseFilter, setCourseFilter] = useState("All");
+  const [subjectFilter, setSubjectFilter] = useState("All");
   const shownEvents = useMemo(() => {
-    const filtered = courseFilter === "All"
+    return subjectFilter === "All"
       ? events
-      : events.filter(e => (e.extendedProps?.course || "Unlabeled") === courseFilter);
-    return filtered.map(decorateEvent);
-  }, [events, courseFilter]);
+      : events.filter(e => subjectLabel(e) === subjectFilter);
+  }, [events, subjectFilter]);
 
   // Selected event for edit/copy
   const [selected, setSelected] = useState(null);
@@ -65,14 +59,15 @@ export default function CalendarView() {
       title,
       start: start.toISOString(),
       end: end?.toISOString(),
-      course: extendedProps?.course || "Unlabeled",
+      subject: extendedProps?.subject || "General",
+      type: extendedProps?.type || "Other",
     });
     setModalOpen(true);
   };
 
   const updateEvent = (updated) => {
     setEvents(prev => prev.map(e => (e.id === updated.id
-      ? { ...e, title: updated.title, start: updated.start, end: updated.end, extendedProps: { course: updated.course } }
+      ? { ...e, title: updated.title, start: updated.start, end: updated.end, extendedProps: { subject: updated.subject, type: updated.type } }
       : e
     )));
     setModalOpen(false);
@@ -109,14 +104,16 @@ export default function CalendarView() {
     <div style={{ padding: 20 }}>
       {/* Filter UI */}
       <div style={{ display: "flex", gap: 12, alignItems: "center", marginBottom: 12 }}>
-        <label>Filter by class:</label>
-        <select value={courseFilter} onChange={e => setCourseFilter(e.target.value)}>
-          {allCourses.map(c => <option key={c} value={c}>{c}</option>)}
+        <label style={{ color: 'var(--muted)' }}>Filter by subject:</label>
+        <select value={subjectFilter} onChange={e => setSubjectFilter(e.target.value)}>
+          {allSubjects.map(s => <option key={s} value={s}>{s}</option>)}
         </select>
       </div>
 
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+        locales={[svLocale]}
+        locale="sv"
         initialView="timeGridWeek"
         headerToolbar={{
           left: "prev,next today",
@@ -128,13 +125,20 @@ export default function CalendarView() {
         droppable={false}
         selectable   // (optional) select to create
         eventResizableFromStart  // resize from either end
-        events={shownEvents}
+        events={shownEvents.map(e => ({
+          ...e,
+          title: `${subjectLabel(e)} — ${e.title}`,
+        }))}
         eventClick={(info) => openEditor(info)}
         eventDrop={onEventChange}
         eventResize={onEventChange}
         // Nice compact rendering
         slotMinTime="07:00:00"
         slotMaxTime="22:00:00"
+        eventTimeFormat={{ hour: '2-digit', minute: '2-digit', hour12: false }}
+        slotLabelFormat={{ hour: '2-digit', minute: '2-digit', hour12: false }}
+        eventMouseEnter={(info) => { info.el.style.filter = 'brightness(0.95)'; info.el.style.cursor = 'pointer'; }}
+        eventMouseLeave={(info) => { info.el.style.filter = ''; }}
       />
 
       {/* Super-simple modal */}
@@ -151,10 +155,10 @@ export default function CalendarView() {
                 />
               </label>
               <label>
-                Class/Course
+                Subject
                 <input
-                  value={selected.course}
-                  onChange={e => setSelected({ ...selected, course: e.target.value })}
+                  value={selected.subject}
+                  onChange={e => setSelected({ ...selected, subject: e.target.value })}
                 />
               </label>
               <label>
@@ -173,10 +177,10 @@ export default function CalendarView() {
               </label>
 
               <div style={{ display: "flex", gap: 8, justifyContent: "space-between", marginTop: 8 }}>
-                <button onClick={() => updateEvent(selected)}>Save</button>
+                <button className="primary" onClick={() => updateEvent(selected)}>Save</button>
                 <button onClick={() => copyEventToWeekOffset(selected.id, 1)}>Copy → next week</button>
                 <button onClick={() => copyEventToWeekOffset(selected.id, -1)}>Copy → previous week</button>
-                <button onClick={() => deleteEvent(selected.id)} style={{ background: "#d32f2f" }}>Delete</button>
+                <button onClick={() => deleteEvent(selected.id)} style={{ background: "#d32f2f", color: '#fff', borderRadius: 12, padding: '10px 12px', border: 0 }}>Delete</button>
                 <button onClick={() => setModalOpen(false)}>Close</button>
               </div>
             </div>
