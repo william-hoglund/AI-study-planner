@@ -1,6 +1,6 @@
 import React from 'react';
 import './PageStyles.css';
-import ScheduleOptimizer from '../components/ScheduleOptimizer.jsx';
+import ScheduleOptimizer from './ScheduleOptimizer.jsx';
 
 export default function PlanPage() {
   return (
